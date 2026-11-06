@@ -1,0 +1,5 @@
+La última exposición
+Una experiencia de VANGUARDIA IA HUB.
+Investigación y vibe coding: Carlos Mirón. Dirección creativa: César Gaytán. Fotografía: Homero Sánchez.
+
+Para jugarlo, sube esta carpeta a cualquier servidor web (itch.io, Netlify, GitHub Pages) y abre index.html. Abrirlo directo desde la carpeta no carga el sonido ni los textos en todos los navegadores.
