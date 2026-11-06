@@ -192,9 +192,17 @@ p{margin:0;line-height:1.6;font-size:16.5px;max-width:62ch}
 .d-sec h3{font-family:var(--body);font-weight:600;font-size:23px;line-height:1.15;margin:0}
 .d-sec h3 span{font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:var(--rojo);margin-right:8px;font-weight:700}
 .d-sec p{font-family:var(--body);font-size:16px;line-height:1.6;margin:0;color:#221e17}
-.d-tira{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+.d-tira{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px}
 .d-tira button{padding:0;border:0;background:#222;aspect-ratio:1;max-width:100%;overflow:hidden;cursor:zoom-in}
 .d-tira img{width:100%;height:100%;object-fit:cover;display:block}
+.d-orig{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;color:var(--gris);margin:-10px 0 0}
+.d-voz{display:grid;gap:4px;border-left:3px solid var(--regla);padding-left:12px}
+.d-voz b{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--rojo)}
+.d-video{position:relative;aspect-ratio:16/9;max-width:100%;background:#111}
+.d-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.d-vbtn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--tinta);border:1px solid var(--tinta);border-radius:20px;padding:9px 14px;text-decoration:none;justify-self:start}
+.d-vbtn::before{content:"";border-left:9px solid var(--rojo);border-top:6px solid transparent;border-bottom:6px solid transparent}
+.diario .d-leer{background:var(--rojo);color:#fff;justify-self:stretch;text-align:center;text-decoration:none;display:block}
 .d-box{background:#e7e0cf;border-left:4px solid var(--rojo);padding:12px 14px;display:grid;gap:8px}
 .d-box b{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--rojo)}
 .d-box p{font-family:var(--body);font-size:15px;line-height:1.55;margin:0}
@@ -243,6 +251,8 @@ p{margin:0;line-height:1.6;font-size:16.5px;max-width:62ch}
 .sh-grid a,.sh-grid button{display:flex;align-items:center;justify-content:center;gap:8px;min-height:50px;border-radius:12px;border:1px solid rgba(217,209,188,.3);background:transparent;color:var(--hueso);font-family:var(--mono);font-size:13px;font-weight:700;letter-spacing:.06em;text-decoration:none}
 .sh-grid a i{width:10px;height:10px;border-radius:50%;display:block}
 .sh-grid .uno{grid-column:1 / -1;background:var(--ambar);color:#0b1110;border-color:var(--ambar)}
+.sh-ig{display:grid;gap:10px;justify-items:start}.sh-ig img{width:120px;aspect-ratio:9/16;object-fit:cover;border-radius:8px;border:1px solid var(--linea);max-width:100%}.sh-ig p{font-size:14px;line-height:1.5;color:var(--salvia)}
+.sheet{max-height:92dvh;overflow-y:auto}
 .sh-link{display:grid;grid-template-columns:1fr auto;gap:8px}
 .sh-link input{min-width:0;font-family:var(--mono);font-size:12.5px;color:var(--hueso);background:rgba(0,0,0,.3);border:1px solid var(--linea);border-radius:10px;padding:10px 12px}
 .sh-link button{border:1px solid rgba(217,209,188,.4);background:transparent;border-radius:10px;padding:0 14px;font-family:var(--mono);font-size:12px;font-weight:700}
@@ -422,18 +432,21 @@ p{margin:0;line-height:1.6;font-size:16.5px;max-width:62ch}
   <article class="diario" aria-label="Nota publicada">
     <div class="d-top"><span id="d-fecha"></span><span>Saltillo, Coahuila</span></div>
     <h1 class="d-mast">Vanguardia<small>MX</small></h1>
-    <nav class="d-nav" aria-label="Secciones"><span>Saltillo</span><b>Especial Día de Muertos</b><span>Cultura</span><span>Fotografía</span></nav>
-    <div class="d-kicker">Especial Día de Muertos · Fotogalería</div>
-    <h2 class="d-h1">De noche en el Panteón de Santiago: ocho tumbas que guardan la historia de Saltillo</h2>
-    <p class="d-dek">Mármol de Carrara, cantera que llegó en tren desde San Luis Potosí y un ancla junto a una columna truncada. Un recorrido con flash por los sepulcros más llamativos del panteón, con la lectura de Carlos Recio Dávila y Arturo Eduardo Villarreal Reyes.</p>
+    <nav class="d-nav" aria-label="Secciones"><span>Coahuila</span><span>Saltillo</span><b>Historias de Saltillo</b><span>Vida</span></nav>
+    <div class="d-kicker" id="d-kicker">Historias de Saltillo</div>
+    <h2 class="d-h1" id="d-h1"></h2>
+    <p class="d-dek" id="d-dek"></p>
     <p class="d-tiempo" id="d-tiempo"></p>
+    <div class="d-by"><span id="d-autores"></span></div>
     <div class="d-by">Fotografía: <input id="d-firma" maxlength="40" value="Fotógrafo de guardia" aria-label="Tu nombre para el crédito"> <span id="d-hora"></span></div>
+    <p class="d-orig">Fotografías originales de Homero Sánchez</p>
     <figure class="d-fig" id="d-portada"></figure>
     <div class="d-body" id="d-intro"></div>
     <div id="d-secs" style="display:grid;gap:22px"></div>
+    <a class="btn d-leer" id="d-leer" target="_blank" rel="noopener">Leer la nota completa en Vanguardia MX</a>
     <aside class="d-box" id="d-notas" hidden></aside>
     <aside class="d-box"><b>Cómo se hizo</b><div class="d-stats" id="end-stats"></div></aside>
-    <p class="d-pie">Una experiencia de Vanguardia IA Hub. Investigación y vibe coding: Carlos Mirón. Dirección creativa: César Gaytán. Fotografía: Homero Sánchez. Imágenes modificadas con IA para la estética del juego. Análisis histórico: Carlos Recio Dávila y Arturo Eduardo Villarreal Reyes. Textos de T02 y T06: Griselda Salas. Con información de notas publicadas en Vanguardia.<br>Esta página es el final de "La última exposición", un juego sobre el Panteón de Santiago.</p>
+    <p class="d-pie">Texto: César Gaytán y Carlos M.M., publicado en Vanguardia MX el 6 de noviembre de 2026 en Historias de Saltillo. Fotografías originales: Homero Sánchez, modificadas con IA para la estética del juego. Con la participación de Carlos Recio Dávila, Arturo Eduardo Villarreal Reyes y Griselda Salas. Una experiencia de Vanguardia IA Hub. Investigación y vibe coding: Carlos Mirón. Dirección creativa: César Gaytán.<br>Esta página es el final de "La última exposición", un juego sobre el Panteón de Santiago.</p>
     <div class="d-acc"><button class="btn" id="end-compartir">Compartir mi tiempo</button><button class="btn" id="end-selfie">Hacer mi selfie</button><button class="btn ghost" id="end-again">Volver a jugar</button><button class="btn ghost" id="end-fuentes">Fuentes</button><button class="btn ghost" id="end-book">Ver la libreta</button></div>
   </article>
   <div id="d-zoom" hidden><div><img id="d-zoom-img" alt=""><p id="d-zoom-t"></p></div></div>
@@ -477,6 +490,11 @@ p{margin:0;line-height:1.6;font-size:16.5px;max-width:62ch}
   <div class="sh-head"><b id="sh-t">Compartir</b><button class="x" id="sh-x" aria-label="Cerrar">✕</button></div>
   <p id="sh-msg"></p>
   <div class="sh-grid" id="sh-grid"></div>
+  <div class="sh-ig" id="sh-ig" hidden>
+    <img id="sh-ig-img" alt="Imagen para tu historia de Instagram">
+    <p>Ya copié el enlace. Guarda esta imagen (o mantenla presionada), súbela a tu historia y pega el enlace con el sticker de enlace.</p>
+    <div class="row"><button class="btn" id="sh-ig-save" type="button">Guardar imagen</button><a class="btn ghost" href="https://www.instagram.com/" target="_blank" rel="noopener">Abrir Instagram</a></div>
+  </div>
   <div class="sh-link"><input id="sh-url" readonly aria-label="Enlace del juego"><button id="sh-copy">Copiar</button></div>
 </div></div>
 <div id="coach" hidden><div class="ring" id="co-ring"></div><div class="card" id="co-card"><small id="co-step"></small><p id="co-text"></p><button class="btn full" id="co-next">Siguiente</button></div></div>
@@ -487,6 +505,7 @@ p{margin:0;line-height:1.6;font-size:16.5px;max-width:62ch}
 <script src="walk_rle.js"></script>
 <script src="atlas.js"></script>
 <script src="tarjeta.js"></script>
+<script src="nota.js"></script>
 <script>
 (()=>{
 'use strict';
@@ -800,18 +819,26 @@ let runHeld=false;{const b=$('btn-run');b.addEventListener('pointerdown',e=>{e.p
 function send(){if(!S||S.paused||countShots()<TOTAL||!nearVocho())return;S.sent=true;S.tiempo=S.T;try{localStorage.removeItem(SAVEKEY)}catch(e){}SND.pick();vib([30,40,30]);armarNota();showScreen('sc-end')}
 function esc(t){return String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 function armarNota(){
-  const hoy=new Date(),man=new Date(hoy.getTime()+864e5);
-  $('d-fecha').textContent=man.toLocaleDateString('es-MX',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  const hoy=new Date(),N=window.NOTA;
+  $('d-fecha').textContent=N.fecha;
   $('d-hora').textContent='· Material enviado a las '+hoy.toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit'});
   try{const f=localStorage.getItem('ultima-exposicion-firma');if(f)$('d-firma').value=f}catch(e){}
-  const T1=LOCS.find(l=>l.id==='T04');
-  $('d-portada').innerHTML=`<img src="fotos/T04_PG.jpg" alt="${esc(T1.nombre)}, plano general, de noche"><figcaption><b>${esc(T1.nombre)}.</b> ${esc(T1.tomas[0].n||T1.tomas[0].tit)} <span class="cr">Foto: <span class="firma"></span></span></figcaption>`;
-  $('d-intro').innerHTML=`<p>La noche del 2 de noviembre, con una cámara, una lámpara y la batería contada, la redacción recorrió el Panteón de Santiago para documentar ocho de sus sepulturas más llamativas y la puerta de entrada. El resultado son ${TOTAL} imágenes tomadas con flash: un plano general, un primer plano y tres detalles de cada tumba.</p><p>Las lecturas de cada sepulcro son del historiador Carlos Recio Dávila y del arquitecto Arturo Eduardo Villarreal Reyes, especialista en patrimonio, que identifican estilos, materiales y, cuando es posible, a las familias sepultadas. Algunos datos siguen pendientes de confirmar, y varias tumbas cargan leyendas que el panteón todavía cuenta de noche.</p>`;
-  $('d-secs').innerHTML=LOCS.filter(L=>L.id!=='E00').map(L=>{const t=L.tomas,resto=t.slice(1);
-    return `<section class="d-sec"><h3><span>${L.id}</span>${esc(L.nombre)}</h3>
-      <figure class="d-fig"><img src="fotos/${L.id}_PG.jpg" alt="${esc(L.nombre)}, plano general"><figcaption><b>${esc(t[0].tit)}.</b> ${esc(t[0].n)}</figcaption></figure>
-      <p>${esc(t[1]?t[1].n:'')}</p>
-      <div class="d-tira">${resto.map(k=>`<button data-src="fotos/${L.id}_${k.k}.jpg" data-t="${esc(k.tit)}" aria-label="Ampliar ${TIPOS[k.k]}"><img src="thumbs/${L.id}_${k.k}.jpg" alt="${esc(L.nombre)}, ${TIPOS[k.k].toLowerCase()}"></button>`).join('')}</div></section>`}).join('');
+  $('d-kicker').textContent=N.seccion;$('d-h1').textContent=N.titular;$('d-dek').textContent=N.dek;$('d-autores').textContent='Por '+N.autores+' · '+N.seccion+', '+N.fecha;
+  $('d-leer').href=N.url;
+  const E=LOCS.find(l=>l.id==='E00'),pie=(L,k)=>`<figcaption><b>${esc(k.tit)}.</b> ${esc(L.nombre)}. <span class="cr">Foto: <span class="firma"></span></span></figcaption>`;
+  $('d-portada').innerHTML=`<img src="fotos/E00_PG.jpg" alt="${esc(E.nombre)}, de noche">${pie(E,E.tomas[0])}`;
+  $('d-intro').innerHTML=N.intro.map(p=>`<p>${esc(p)}</p>`).join('');
+  // los videos se incrustan donde se puede (la versión publicada en un sitio web); dentro de Claude se abren en YouTube
+  const incrustar=!/claude|anthropic|localhost/.test(location.hostname)&&location.protocol==='https:';
+  const video=v=>incrustar?`<div class="d-video"><iframe src="https://www.youtube-nocookie.com/embed/${v}" title="Video de la tumba" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>`:`<a class="d-vbtn" href="https://www.youtube.com/watch?v=${v}" target="_blank" rel="noopener">Ver el video</a>`;
+  $('d-secs').innerHTML=N.secs.map(sec=>{const L=LOCS.find(l=>l.id===sec.id);if(!L)return'';const t=L.tomas,det=t.slice(2);
+    return `<section class="d-sec"><h3>${esc(sec.t)}</h3>
+      <figure class="d-fig"><img src="fotos/${L.id}_PG.jpg" alt="${esc(L.nombre)}, plano general">${pie(L,t[0])}</figure>
+      ${sec.p.map(x=>`<p>${esc(x)}</p>`).join('')}
+      ${t[1]?`<figure class="d-fig"><img src="fotos/${L.id}_PP.jpg" alt="${esc(L.nombre)}, primer plano">${pie(L,t[1])}</figure>`:''}
+      ${sec.voz.map(([n,x])=>`<div class="d-voz"><b>${esc(n)}</b><p>${esc(x)}</p></div>`).join('')}
+      <div class="d-tira">${det.map(k=>`<button data-src="fotos/${L.id}_${k.k}.jpg" data-t="${esc(k.tit)}" aria-label="Ampliar ${esc(k.lab||TIPOS[k.k])}"><img src="thumbs/${L.id}_${k.k}.jpg" alt="${esc(L.nombre)}, ${esc((k.lab||TIPOS[k.k]).toLowerCase())}"></button>`).join('')}</div>
+      ${video(sec.v)}</section>`}).join('');
   const notas=S.notas.map(i=>NOTAS[i]);$('d-notas').hidden=!notas.length;
   $('d-notas').innerHTML=`<b>Del archivo</b>`+notas.map(n=>`<p><strong>${esc(n.t)}.</strong> ${esc(n.p)}</p>`).join('');
   $('d-tiempo').textContent=`${TOTAL} fotografías en ${fmtT(S.tiempo||S.T)}`;
@@ -852,20 +879,44 @@ function grabarLapida(nombre){
   return cv}
 
 /* ---------- compartir ---------- */
-const URL_JUEGO='https://claude.ai/artifact/2Kw4CMtE3JwVkYopVKM736';
+const URL_JUEGO='https://chargaytan.github.io/la-ultima-exposicion/';
 function fmtT(seg){seg=Math.max(1,Math.round(seg));const m=Math.floor(seg/60),s=seg%60;return m?`${m} min ${s} s`:`${s} s`}
 const esMovil=/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
-function compartir(msg){
+// guarda un archivo: dentro de Claude con su sistema de descargas, fuera (GitHub, itch.io) como cualquier página
+async function guardarArchivo(blob,nombre){
+  if(window.claude&&claude.use){let dl=null;try{dl=await claude.use('downloads')}catch(e){}
+    if(dl){try{await dl.save({filename:nombre,data:blob});return 'ok'}catch(e){return e&&e.code==='declined'?'no':'error'}}
+    if(/claude|anthropic/.test(location.hostname))return 'error'}
+  try{const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=nombre;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),4000);return 'ok'}catch(e){return 'error'}}
+// imagen para Instagram: la tarjeta de la selfie si ya existe; si no, una tarjeta de invitación
+let igBlob=null,igPend=null;
+function prepararIG(){igBlob=null;igPend=(async()=>{try{const cv=tarjetaCv||await TARJETA.crear(S&&S.sent?{selfie:null,nombre:($('d-firma').value.trim()||nombreJugador()||'Fotógrafo de guardia'),titular:`${TOTAL} fotografías`,bajada:`en ${fmtT(S.tiempo||S.T)}, de noche y con flash`,fecha:new Date()}:{selfie:null,nombre:'',credito:'JUEGA EN CHARGAYTAN.GITHUB.IO',titular:'La última exposición',bajada:'un juego de terror en el Panteón de Santiago',frase:'Juanito te espera.',fecha:new Date()});
+  igBlob=await new Promise(r=>cv.toBlob(r,'image/jpeg',.92))}catch(e){}})()}
+async function instagram(msg){
+  copiarEnlace(URL_JUEGO,true);
+  if(!igBlob&&igPend)await igPend;
+  const f=igBlob&&new File([igBlob],'la-ultima-exposicion.jpg',{type:'image/jpeg'});
+  if(f&&navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share({files:[f],text:msg});toast('En Instagram, pega el enlace con el sticker de enlace.',4);return}catch(e){if(e&&e.name==='AbortError')return}}
+  // sin compartir archivos: mostrar la imagen para guardarla y abrir Instagram
+  $('sh-ig').hidden=false;if(igBlob)$('sh-ig-img').src=URL.createObjectURL(igBlob);
+  toast('Enlace copiado. Guarda la imagen y súbela a tu historia.',4)}
+let shMsg='';
+async function compartir(msg){shMsg=msg;
+  // en celular, el menú de compartir del teléfono (funciona en la versión web; dentro de Claude cae a la hoja propia)
+  if(esMovil&&navigator.share){try{await navigator.share({title:'La última exposición',text:msg,url:URL_JUEGO});return}catch(e){if(e&&e.name==='AbortError')return}}
   const u=encodeURIComponent(URL_JUEGO),t=encodeURIComponent(msg),tu=encodeURIComponent(msg+' '+URL_JUEGO);
   const redes=[['WhatsApp',(esMovil?'https://wa.me/?text=':'https://web.whatsapp.com/send?text=')+tu,'#25d366'],['Facebook','https://www.facebook.com/sharer/sharer.php?u='+u,'#1877f2'],['X','https://x.com/intent/post?text='+t+'&url='+u,'#e7e9ea'],['Telegram','https://t.me/share/url?url='+u+'&text='+t,'#2aabee']];
-  const copiar='<button type="button" id="sh-copy2">Copiar enlace</button>';
-  $('sh-grid').innerHTML=(esMovil?'':copiar.replace('<button','<button class="uno"'))+redes.map(([n,h,c],i)=>`<a href="${h}" target="_blank" rel="noopener"${esMovil&&i===0?' class="uno"':''}><i style="background:${c}"></i>${n}</a>`).join('')+(esMovil?copiar:'');
-  $('sh-msg').textContent=msg;$('sh-url').value=URL_JUEGO;$('share').hidden=false;
+  const copiar='<button type="button" id="sh-copy2">Copiar enlace</button>',ig='<button type="button" id="sh-igb"><i style="background:linear-gradient(45deg,#f9ce34,#ee2a7b,#6228d7)"></i>Instagram</button>';
+  $('sh-grid').innerHTML=(esMovil?'':copiar.replace('<button','<button class="uno"'))+redes.map(([n,h,c],i)=>`<a href="${h}" target="_blank" rel="noopener"${esMovil&&i===0?' class="uno"':''}><i style="background:${c}"></i>${n}</a>`).join('')+ig+(esMovil?copiar:'');
+  $('sh-msg').textContent=msg;$('sh-url').value=URL_JUEGO;$('sh-ig').hidden=true;$('share').hidden=false;
   $('sh-copy2').addEventListener('click',()=>copiarEnlace(msg+' '+URL_JUEGO));
+  $('sh-igb').addEventListener('click',()=>instagram(msg));
+  prepararIG();
 }
-function copiarEnlace(txt){const ok=()=>toast('Enlace copiado.',2),mal=()=>{const i=$('sh-url');i.focus();i.select();try{i.setSelectionRange(0,999)}catch(e){}toast('Mantén presionado el enlace para copiarlo.',3)};
+function copiarEnlace(txt,mudo){const ok=()=>{if(!mudo)toast('Enlace copiado.',2)},mal=()=>{const i=$('sh-url');i.focus();i.select();try{i.setSelectionRange(0,999)}catch(e){}toast('Mantén presionado el enlace para copiarlo.',3)};
   try{navigator.clipboard.writeText(txt).then(ok,mal)}catch(e){mal()}}
 $('sh-copy').addEventListener('click',()=>copiarEnlace(URL_JUEGO));
+$('sh-ig-save').addEventListener('click',async()=>{if(!igBlob&&igPend)await igPend;if(!igBlob)return;const r=await guardarArchivo(igBlob,'la-ultima-exposicion.jpg');if(r==='ok')toast('Imagen guardada.',2);else if(r==='error')toast('Mantén presionada la imagen para guardarla.',3)});
 $('sh-x').addEventListener('click',()=>{$('share').hidden=true});
 $('share').addEventListener('click',e=>{if(e.target.id==='share')$('share').hidden=true});
 $('ti-compartir').addEventListener('click',()=>compartir('La última exposición: un juego de terror en el Panteón de Santiago, Saltillo. Fotografía la entrada y las ocho tumbas antes de que se acabe la batería.'));
@@ -883,13 +934,11 @@ $('sf-in').addEventListener('change',()=>{const f=$('sf-in').files&&$('sf-in').f
   i.onload=()=>{selfieImg=i;pintarTarjeta()};i.onerror=()=>toast('No pude abrir esa foto. Prueba con otra.',3);i.src=u;$('sf-in').value=''});
 $('sf-guardar').addEventListener('click',async()=>{if(!tarjetaCv)return;
   const ayuda=()=>{$('sf-ayuda').hidden=false;toast('Mantén presionada la imagen para guardarla.',3)};
-  let dl=null;try{dl=window.claude&&claude.use?await claude.use('downloads'):null}catch(e){}
-  if(!dl)return ayuda();
   const blob=await new Promise(r=>tarjetaCv.toBlob(r,'image/jpeg',.92));
-  try{await dl.save({filename:'la-ultima-exposicion.jpg',data:blob});toast('Tarjeta guardada.',2)}catch(e){if(e&&e.code==='declined')return;ayuda()}});
+  const r=await guardarArchivo(blob,'la-ultima-exposicion.jpg');if(r==='ok')toast('Tarjeta guardada.',2);else if(r==='error')ayuda()});
 $('sf-compartir').addEventListener('click',()=>$('end-compartir').click());
 /* ---------- herramientas de desarrollador ---------- */
-const CODIGO=[['index.html','El juego completo: pantallas, estilos y lógica'],['datos.js','Textos de las 41 fotos y notas de archivo'],['caminos.js','Tumbas, puntos de foto, faroles y vocho'],['walk_rle.js','Zonas caminables del mapa, por tramos'],['atlas.js','Posición de cada cuadro de animación'],['arte.js','Efectos dibujados con código: ojos y remolinos'],['tarjeta.js','La tarjeta de la selfie con Juanito']];
+const CODIGO=[['index.html','El juego completo: pantallas, estilos y lógica'],['datos.js','Textos de las 41 fotos y notas de archivo'],['caminos.js','Tumbas, puntos de foto, faroles y vocho'],['walk_rle.js','Zonas caminables del mapa, por tramos'],['atlas.js','Posición de cada cuadro de animación'],['arte.js','Efectos dibujados con código: ojos y remolinos'],['tarjeta.js','La tarjeta de la selfie con Juanito'],['nota.js','Texto de La ciudad de los muertos para la nota final']];
 const MEDIOS=()=>['mapa2x.jpg','atlas.webp','juanito.webp','juanito_fondo.jpg','lapida.jpg',...['ambiente','efectos','grillo','silencio'].map(n=>'sonidos/'+n+'.mp3'),...LOCS.flatMap(L=>L.tomas.map(t=>L.id+'_'+t.k+'.jpg')).flatMap(f=>['fotos/'+f,'thumbs/'+f])];
 let dvTxt='',dvCache={};
 async function dvAbrir(f){document.querySelectorAll('#dv-files button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.f===f?'true':'false'));$('dv-name').textContent=f;$('dv-pre').textContent='Cargando…';
@@ -903,15 +952,14 @@ $('dv-copy').addEventListener('click',()=>{if(!dvTxt)return;try{navigator.clipbo
 let jszip=null;
 const cargarZip=()=>jszip?Promise.resolve(jszip):new Promise((ok,mal)=>{const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';s.onload=()=>{jszip=window.JSZip;jszip?ok(jszip):mal()};s.onerror=mal;document.head.appendChild(s)});
 async function dvZip(todo){const est=$('dv-estado'),b1=$('dv-zip'),b2=$('dv-zipall');b1.disabled=b2.disabled=true;
-  try{let dl=null;try{dl=window.claude&&claude.use?await claude.use('downloads'):null}catch(e){}
-    if(!dl){est.textContent='La descarga solo funciona abriendo el juego en claude.ai. Mientras, puedes copiar cada archivo con el botón Copiar.';return}
-    est.textContent='Preparando…';const Z=await cargarZip(),z=new Z();
+  try{est.textContent='Preparando…';const Z=await cargarZip(),z=new Z();
     const lista=[...CODIGO.map(c=>c[0]),...(todo?MEDIOS():[])];let n=0;
     for(const f of lista){const r=await fetch(f);if(r.ok)z.file('la-ultima-exposicion/'+f,await r.blob());n++;est.textContent=`Empacando ${n} de ${lista.length} archivos…`}
     z.file('la-ultima-exposicion/LEEME.txt','La última exposición\nUna experiencia de VANGUARDIA IA HUB.\nInvestigación y vibe coding: Carlos Mirón. Dirección creativa: César Gaytán. Fotografía: Homero Sánchez.\n\n'+(todo?'Para jugarlo, sube esta carpeta a cualquier servidor web (itch.io, Netlify, GitHub Pages) y abre index.html. Abrirlo directo desde la carpeta no carga el sonido ni los textos en todos los navegadores.\n':'Este zip trae solo el código. Las fotos, el mapa y los sonidos vienen en el zip del juego completo.\n'));
     est.textContent='Comprimiendo…';const blob=await z.generateAsync({type:'blob',compression:todo?'STORE':'DEFLATE'});
-    est.textContent='';await dl.save({filename:todo?'la-ultima-exposicion-completo.zip':'la-ultima-exposicion-codigo.zip',data:blob});toast('Zip guardado.',2)}
-  catch(e){if(e&&e.code==='declined'){est.textContent=''}else est.textContent='No se pudo armar el zip. Intenta de nuevo.'}
+    est.textContent='';const r=await guardarArchivo(blob,todo?'la-ultima-exposicion-completo.zip':'la-ultima-exposicion-codigo.zip');
+    if(r==='ok')toast('Zip guardado.',2);else if(r==='error')est.textContent='No se pudo guardar el zip. Puedes copiar cada archivo con el botón Copiar.'}
+  catch(e){est.textContent='No se pudo armar el zip. Intenta de nuevo.'}
   finally{b1.disabled=b2.disabled=false}}
 $('dv-zip').addEventListener('click',()=>dvZip(false));$('dv-zipall').addEventListener('click',()=>dvZip(true));
 function pintarFirma(){const f=$('d-firma').value.trim()||'Fotógrafo de guardia';document.querySelectorAll('#sc-end .firma').forEach(e=>e.textContent=f)}

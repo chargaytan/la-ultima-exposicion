@@ -36,7 +36,7 @@ function periodico(c,o){
   c.textAlign='center';c.font='700 27px "Courier Prime",monospace';c.fillStyle='#b8321f';c.fillText('ESPECIAL DE NOVIEMBRE · PANTEÓN DE SANTIAGO',W/2,y0+204);
   c.fillStyle='#17140f';c.font='600 66px "Spectral",Georgia,serif';c.fillText(o.titular,W/2,y0+290);
   c.font='italic 400 38px "IM Fell English",Georgia,serif';c.fillStyle='#3b362c';c.fillText(o.bajada,W/2,y0+346);
-  c.font='700 28px "Courier Prime",monospace';c.fillStyle='#5a5446';c.fillText(('Fotografía: '+o.nombre).toUpperCase(),W/2,y0+400);
+  c.font='700 28px "Courier Prime",monospace';c.fillStyle='#5a5446';c.fillText((o.credito||'Fotografía: '+o.nombre).toUpperCase(),W/2,y0+400);
   c.font='italic 400 30px "IM Fell English",Georgia,serif';c.fillStyle='#8a8170';c.fillText('La última exposición · una experiencia de Vanguardia IA Hub',W/2,H-22)}
 async function crear(o){await recursos();
   const cv=document.createElement('canvas');cv.width=W;cv.height=H;const c=cv.getContext('2d');
@@ -48,7 +48,7 @@ async function crear(o){await recursos();
     fantasma(c,W-480,FOTO*.16,FOTO*.47,.88);grano(c,W-500,FOTO*.14,500,FOTO*.5);
   }else{
     if(fondo){cubrir(c,fondo,0,0,W,FOTO,.567,.5);const v=c.createRadialGradient(W/2,FOTO*.5,FOTO*.25,W/2,FOTO*.5,FOTO*.8);v.addColorStop(0,'rgba(0,0,0,0)');v.addColorStop(1,'rgba(2,6,5,.75)');c.fillStyle=v;c.fillRect(0,0,W,FOTO)}
-    c.save();c.textAlign='center';c.font='italic 400 64px "IM Fell English",Georgia,serif';c.fillStyle='#f0b45a';c.shadowColor='#000';c.shadowBlur=18;c.fillText('Juanito te vio terminar.',W/2,170);c.restore()}
+    c.save();c.textAlign='center';c.font='italic 400 64px "IM Fell English",Georgia,serif';c.fillStyle='#f0b45a';c.shadowColor='#000';c.shadowBlur=18;c.fillText(o.frase||'Juanito te vio terminar.',W/2,170);c.restore()}
   sello(c,o.fecha||new Date());
   periodico(c,o);
   return cv}
